@@ -25,36 +25,71 @@ class TipsScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: provider.isLoading
             ? const Center(child: CircularProgressIndicator())
-            : provider.errorMessage != null
-                ? Center(child: Text(provider.errorMessage!))
-                : Card(
+            : Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Today’s Tip',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Card(
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(18),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.tips_and_updates, size: 40),
+                          const Row(
+                            children: [
+                              Icon(Icons.lightbulb, size: 28),
+                              SizedBox(width: 8),
+                              Text(
+                                'Fitness Advice',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 16),
                           Text(
-                            provider.tip?.title ?? 'Fitness Tip',
+                            provider.title,
                             style: const TextStyle(
-                              fontSize: 22,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 12),
+                          const SizedBox(height: 10),
                           Text(
-                            provider.tip?.body ??
-                                'Press refresh to load a fitness tip.',
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            'This screen demonstrates REST API integration with loading and error handling.',
+                            provider.body,
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ],
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Tip of the Day',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Try to stay active daily. Even a 20-minute walk can improve your health and mood.',
+                  ),
+                ],
+              ),
       ),
     );
   }

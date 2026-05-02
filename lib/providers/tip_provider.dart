@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../models/fitness_tip.dart';
-import '../services/api_service.dart';
-
 class TipProvider extends ChangeNotifier {
-  FitnessTip? tip;
   bool isLoading = false;
-  String? errorMessage;
+
+  String title = 'Stay Consistent';
+  String body =
+      'Consistency is key in fitness. Even short daily workouts can lead to long-term results if you keep doing them regularly.';
 
   Future<void> loadTip() async {
     isLoading = true;
-    errorMessage = null;
     notifyListeners();
 
-    try {
-      tip = await ApiService.fetchFitnessTip();
-    } catch (e) {
-      errorMessage = 'Could not load tip. Check internet connection.';
-    }
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    title = 'Warm Up First';
+    body =
+        'Always start with a short warm-up before exercising. It helps prepare your muscles and reduces the chance of injury.';
 
     isLoading = false;
     notifyListeners();

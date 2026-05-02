@@ -59,16 +59,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 24),
-            const Card(
-              child: ListTile(
-                leading: Icon(Icons.check_circle_outline),
-                title: Text('Phase 3 Concepts'),
-                subtitle: Text(
-                  'Provider, SQLite, REST API, image picker, responsive UI, and theme mode.',
-                ),
-              ),
-            ),
           ],
         ),
       ),

@@ -9,11 +9,6 @@ class StatsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<WorkoutProvider>();
-    final maxCalories = provider.workouts.isEmpty
-        ? 1
-        : provider.workouts
-            .map((workout) => workout.calories)
-            .reduce((a, b) => a > b ? a : b);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,7 +20,10 @@ class StatsScreen extends StatelessWidget {
         children: [
           const Text(
             'Workout Progress',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 16),
           if (provider.workouts.isEmpty)
@@ -37,8 +35,6 @@ class StatsScreen extends StatelessWidget {
             )
           else
             ...provider.workouts.map((workout) {
-              final percent = workout.calories / maxCalories;
-
               return Card(
                 child: Padding(
                   padding: const EdgeInsets.all(14),
@@ -47,12 +43,21 @@ class StatsScreen extends StatelessWidget {
                     children: [
                       Text(
                         workout.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       const SizedBox(height: 8),
-                      LinearProgressIndicator(value: percent),
-                      const SizedBox(height: 6),
-                      Text('${workout.calories} calories'),
+                      Text(
+                        '${workout.calories} calories burned',
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        '${workout.duration} minutes',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 ),
